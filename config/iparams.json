@@ -1,0 +1,20 @@
+{
+    "api_key": {
+        "display_name": "Mailgun api key",
+        "type": "text",
+        "required": true,
+        "secure": true
+    },
+    "domain": {
+        "display_name": "Enter the domain of mailgun service",
+        "type": "text",
+        "required": true,
+        "secure": true
+    },
+    "freshteamApiToken": {
+        "display_name": "Enter your access_token for freshteam",
+        "type": "text",
+        "required": true,
+        "secure": true
+    }
+}
