@@ -1,6 +1,11 @@
 ## Freshteam App Project
 
-Congratulations on creating your App Project! Feel free to replace this text with your project description.
+This app auto-syncs employee's email with their team email-groups. The features include
+1. When a new employee is created, the employee gets subscribed to the respective team's email groups
+
+2. When an existing employee changes their primary team, the app automatically unsubscribe the employee from previous team's email group and subscribes them to the new team's email groups
+
+3. When an employee changes their official email, the previous email gets removed from all subscriptions and the new email automatically gets subscribed to all the email groups the previous email was subscribed initially.
 
 ### Project folder structure explained
 
