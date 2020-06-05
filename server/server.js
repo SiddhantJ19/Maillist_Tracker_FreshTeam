@@ -1,7 +1,7 @@
 var {getAllTeamDetails, storeTeamdetails} = require('./lib/TeamDetails');
 var {subscribeEmployee, unsubscribeEmployee} =
     require('./lib/SubscribeEmployee');
-var {resolveTeamName} = require('./lib/SubscribeUtil')
+var {resolveTeamName, getSubcriptions, subscribeEmail, removeMemberDetails, unsubscribe} = require('./lib/SubscribeUtil')
 
 exports = {
 
@@ -18,7 +18,7 @@ exports = {
                   .catch(err => console.error(err));
 
     Promise.all([res])
-        .then(() => renderData({message: 'Saved Team details to datastore'}))
+        .then(() => renderData())
         .catch(err => renderData({message: err.message}))
   },
 
@@ -33,7 +33,7 @@ exports = {
   },
 
 
-  onEmployeeUpdateHandler: function(args) {
+  onEmployeeUpdateHandler: async function(args) {
     let mailgun = require('mailgun-js')(
         {apiKey: args.iparams.api_key, domain: args.iparams.domain});
 
@@ -51,9 +51,29 @@ exports = {
           .then(() => console.log('added again'))
           .catch(err => console.error(err));
     }
+
+    if(hasEmailChanged(args)) {
+      const prev_email = args['data']['changes']['model_changes']['official_email'][0];
+      const employee =  getEmployeeDetails(args);
+
+      // making a deep copy
+      const prevEmployeeObj = JSON.parse(JSON.stringify(employee))
+      prevEmployeeObj.email = prev_email
+
+      try {
+        const subs = await getSubcriptions(prev_email);
+        await subscribeEmail(mailgun, employee, subs.subscriptions);
+        await unsubscribe(mailgun, subs.subscriptions, prevEmployeeObj);
+        await removeMemberDetails(prev_email);
+        await console.log("email updated");
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 
 };
+
 
 
 function getEmployeeDetails(args) {
@@ -68,4 +88,8 @@ function getEmployeeDetails(args) {
 
 function hasTeamChanged(args) {
   return args['data']['changes']['model_changes'].hasOwnProperty('team_id');
+}
+
+function hasEmailChanged(args){
+  return args['data']['changes']['model_changes'].hasOwnProperty('official_email');
 }

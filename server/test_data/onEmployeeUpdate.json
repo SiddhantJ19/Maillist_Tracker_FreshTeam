@@ -106,7 +106,7 @@
       "last_name": "Marvin",
       "employee_id": null,
       "status": "active",
-      "official_email": "alayna@freshteam.com",
+      "official_email": "alayna18@freshteam.com",
       "personal_email": "alayna_personal_1@freshteam.com",
       "confirmed": false,
       "account_admin": false,
@@ -274,10 +274,6 @@
           "full_time",
           "contract"
         ],
-        "team_id": [
-          2000094455,
-          2000094460
-        ],
         "branch_id": [
           1,
           2
@@ -337,9 +333,9 @@
             ]
           ]
         },
-        "personal_email": [
-          "alayna_personal@freshteam.com",
-          "alayna_personal_1@freshteam.com"
+        "official_email": [
+          "alayna17@freshteam.com",
+          "alayna18@freshteam.com"
         ],
         "custom_fields": {
           "fwef_cf_str01": [

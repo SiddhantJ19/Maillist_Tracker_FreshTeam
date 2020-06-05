@@ -38,9 +38,7 @@ async function subscribe(mailgun, mail_lists, employee) {
         }
     });
 
-    return Promise.all(res).then(data => {
-        return data;
-    })
+    return Promise.all(res)
 }
 
 async function unsubscribe(mailgun, mail_lists, employee){
@@ -55,10 +53,41 @@ async function unsubscribe(mailgun, mail_lists, employee){
     return Promise.all(res);
 }
 
+
+async function getSubcriptions(email) {
+    return await $db.get(email);
+}
+
+async function subscribeEmail(mailgun, employee, mail_lists) {
+    return storeMemberDetails(mail_lists, employee.email)
+        .then((mail_lists) => subscribe(mailgun, mail_lists, employee))
+        .catch(err => console.error(err));
+}
+
+
+async function storeMemberDetails(mail_lists, email){
+    try {
+        await $db.set(email, {subscriptions : mail_lists}, {ttl: -1});
+        return mail_lists;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function removeMemberDetails(email){
+    let res =  await $db.delete(email);
+    console.log(res);
+    return 
+}
+
 exports = {
     resolveTeamName,
     getAllMailingLists,
     getTeamMailingLists,
+    storeMemberDetails,
     subscribe,
-    unsubscribe
+    unsubscribe,
+    removeMemberDetails,
+    getSubcriptions,
+    subscribeEmail
 }
