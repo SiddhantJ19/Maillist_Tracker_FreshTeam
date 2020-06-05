@@ -8,8 +8,18 @@ This app auto-syncs employee's email with their team email-groups. The features 
 3. When an employee changes their official email, the previous email gets removed from all subscriptions and the new email automatically gets subscribed to all the email groups the previous email was subscribed initially.
 
 ### Other details
-The app is integrated with mailgun, an email service.
-The app maps the team names to mail-group names.
+The app is integrated with mailgun email service.
+
+Currently Freshteam doesn't support any frontend applications, therefore I had to map teams to mail groups over the team name. In future a frontend app can be provided to give user a more flexible mapping experience.
+
+### Demo videos
+part 1 -> https://youtu.be/21tPP3w8L14
+part 2 -> https://youtu.be/MDzPZhz0ooM
+
+### Takeaways
+1. Understanding and developing serverless apps
+2. Working with Email apis and Freshworks Development Kit
+3. An in depth insight of Freshteam
 
 ### Project folder structure explained
 
