@@ -7,6 +7,10 @@ This app auto-syncs employee's email with their team email-groups. The features 
 
 3. When an employee changes their official email, the previous email gets removed from all subscriptions and the new email automatically gets subscribed to all the email groups the previous email was subscribed initially.
 
+### Other details
+The app is integrated with mailgun, an email service.
+The app maps the team names to mail-group names.
+
 ### Project folder structure explained
 
     .
